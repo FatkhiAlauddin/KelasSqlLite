@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class TemanBaru extends AppCompatActivity {
     private TextInputEditText tNama,tTelpon;
     private Button simpanBtn;
-    String nm,tlp;
+    String nm,tlp,id;
     DBController controller = new DBController(this);
 
     @Override

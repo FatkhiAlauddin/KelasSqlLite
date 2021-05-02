@@ -23,7 +23,7 @@ public class DBController extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists teman");
+        db.execSQL("Drop Table if exists Teman");
         onCreate(db);
     }
 
@@ -34,6 +34,21 @@ public class DBController extends SQLiteOpenHelper {
         nilai.put("telpon", queryValues.get("telpon"));
         basisdata.insert("teman", null, nilai);
         basisdata.close();
+    }
+
+    public void editData(HashMap<String,String> queryVal){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues val = new ContentValues();
+        val.put("nama",queryVal.get("nama"));
+        val.put("telp",queryVal.get("telp"));
+        db.update("teman",val,"id=?",new String[]{queryVal.get("id")});
+        db.close();
+    }
+
+    public void hapusData(HashMap<String,String> queryVal){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete("teman","id=?",new String[]{queryVal.get("id")});
+        db.close();
     }
 
     public ArrayList<HashMap<String,String>> getAllTeman(){
